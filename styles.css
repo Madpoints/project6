@@ -1,0 +1,30 @@
+#weatherInfo {
+    font-family: 'Source Sans Pro';
+    border-radius: 5px;
+    margin-top: 30%;
+    background-color: white;
+}
+
+#temp {
+    font-weight: bold;
+}
+
+#unit {
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 0;
+    font-size: 1em;
+}
+
+#descr {
+    margin-bottom: 0;
+}
+
+p {
+    font-size: 1.5em;
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 5%;
+}
