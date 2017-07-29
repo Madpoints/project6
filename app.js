@@ -1,5 +1,5 @@
 /*global $*/
-
+var weatherCodes = [["01", "clearSky"], ["02", "fewClouds"], ["03", "scatteredClouds"], ["04", "brokenClouds"], ["09", "showerRain"], ["10", "rain"], ["11", "thunderstorm"], ["13", "snow"], ["50", "mist"]];
 
 $(document).ready(function() {
    getLocation();
@@ -42,15 +42,22 @@ function convert() {
 }
 
 function addContent(response) {
+	var iconCode = response.weather[0].icon; 
+    var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+
+    $('#icon').html("<img src='" + iconUrl  + "'>");
+	weatherCodes.forEach(function(code) {
+		if (code[0] === iconCode.slice(0, -1)) {
+			console.log(code[1]);
+			$('body').css("background-image", 'url(./images/' + code[1] + '.jpg)');
+		}
+	});
+
+	$('h1').text("Local Weather App")
 	$('#city').text(response.name + ",");
     $('#country').text(response.sys.country);
     $('#temp').text(Math.round(response.main.temp));
     $('#degree').html("&#176");
     $('#unit').text("F");
     $('#descr').text(response.weather[0].description); 
-
-    var icon = response.weather[0].icon; 
-    var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
-
-    $('#icon').html("<img src='" + iconUrl  + "'>");		
 }
