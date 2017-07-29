@@ -1,10 +1,15 @@
 /*global $*/
 var weatherCodes = [["01", "clearSky"], ["02", "fewClouds"], ["03", "scatteredClouds"], ["04", "brokenClouds"], ["09", "showerRain"], ["10", "rain"], ["11", "thunderstorm"], ["13", "snow"], ["50", "mist"]];
 
+var weatherData;
+
 $(document).ready(function() {
    getLocation();
    $('#unit').click(function() {
    		convert();
+   });
+   $('#moreInfo').click(function() {
+   		getMoreInfo(weatherData.main);
    });
 });
 
@@ -13,6 +18,7 @@ function getWeather(position) {
         url: 'http://api.openweathermap.org/data/2.5/weather?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&units=imperial&APPID=d97c4820eeb5a1aad58317e076d46d45',
         success: function(response) {
         	console.log(response);
+        	weatherData = response;
         	addContent(response);
         }
     });
@@ -59,5 +65,27 @@ function addContent(response) {
     $('#temp').text(Math.round(response.main.temp));
     $('#degree').html("&#176");
     $('#unit').text("F");
-    $('#descr').text(response.weather[0].description); 
+    $('#descr').text(response.weather[0].description);
+    $('#moreInfo').text("More Info"); 
+}
+
+// function getMoreInfo(data) {
+// 	console.log(showObject(data.main));
+// }
+
+function getMoreInfo(obj) {
+  console.log($('#moreInfo')["0"].childElementCount);
+
+  if($('#moreInfo')["0"].childElementCount > 0) {
+  	$('#moreInfo').text("More Info");
+  	return;
+  }
+
+  var result = "";
+  for (var p in obj) {
+    if( obj.hasOwnProperty(p) ) {
+      result += "<p class='info'>" + p + ": " + obj[p] + "</p>";
+    } 
+  }              
+  $('#moreInfo').html(result);
 }

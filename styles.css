@@ -6,11 +6,12 @@
 #weatherInfo {
     font-family: 'Source Sans Pro';
     border-radius: 5px;
-    margin-top: 50%;
+    margin-top: 40%;
     color: white;
     background-color: lightgray;
     opacity: 0.5;
     text-shadow: 2px 2px gray;
+    padding: 5%;
 }    
 
 #temp {
@@ -26,6 +27,12 @@
 
 #descr {
     margin-bottom: 0;
+    font-size: 1.75em;
+}
+
+#moreInfo {
+    font-weight: bold;
+    cursor: pointer;
 }
 
 body { 
